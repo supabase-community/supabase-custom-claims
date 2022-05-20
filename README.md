@@ -132,6 +132,7 @@ Here are some sample functions that can be used by any authenticated (logged-in)
 The following functions can only be used by a **"claims admin"**, that is, a user who has the `claims_admin` custom claim set to `true`:
 
 (Note: these functions allow you to view, set, and delete claims for any user of your application, so these would be appropriate for an **administrative** branch of your application to be used only by high-level users with the proper security rights (i.e. `claims_admin` level users.))
+
 ```ts
   public get_claims = async (uid: string) => {
     const { data, error } = await supabase
