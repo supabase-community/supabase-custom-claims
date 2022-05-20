@@ -36,7 +36,7 @@ CREATE OR REPLACE FUNCTION get_my_claim(claim TEXT) RETURNS "jsonb"
     LANGUAGE "sql" STABLE
     AS $$
   select 
-  	coalesce(nullif(current_setting('request.jwt.claims', true), '')::jsonb -> 'app_metadata' -> claim, '{}'::jsonb)::jsonb
+  	coalesce(nullif(current_setting('request.jwt.claims', true), '')::jsonb -> 'app_metadata' -> claim, null)
 $$;
 
 CREATE OR REPLACE FUNCTION get_claims(uid uuid) RETURNS "jsonb"

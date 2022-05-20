@@ -121,7 +121,18 @@ In addition, you can use the following functions that are specific to the curren
 ```
 
 ### Inside an RLS (Row Level Security) Policy
-tbd
+To use custom claims in an RLS Policy, you'll normally use the `get_my_claim` to check a specific claim for the currently logged in user.
+#### examples
+##### only allow users with userrole "MANAGER"
+`get_my_claim('userrole') = '"MANAGER"'`
+(which the UI will change into the more formal):
+`((get_my_claim('userrole'::text)) = '"MANAGER"'::jsonb)`
+
+##### only allow users with userlevel over 100
+`coalesce(get_my_claim('userlevel')::numeric,0) > 100`
+
+##### only allow users with claim_admin = true
+`coalesce(get_my_claim('claims_admin')::bool,false)`
 
 ### Inside your app (using `.rpc()`)
 
