@@ -1,4 +1,6 @@
 # Supabase Custom Claims
+Want to know more about Custom Claims?  See the [FAQ](#faq) below.
+
 ## Installing the Functions
 The file [install.sql](./install.sql) contains all the PostgreSQL functions you need to implement and manage custom claims in your Supabase project.  
 
