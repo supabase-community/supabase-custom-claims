@@ -104,8 +104,57 @@ In addition, you can use the following functions that are specific to the curren
 | 100          |
 ```
 
-### Inside your app (using `.rpc()`)
+### Inside an RLS (Row Level Security) Policy
 tbd
+
+### Inside your app (using `.rpc()`)
+
+Here are some sample functions that can be used by any authenticated (logged-in) user of your application:
+
+```ts
+  public get_my_claims = async () => {
+    const { data, error } = await supabase
+    .rpc('get_my_claims', {});
+    return { data, error };
+  }
+  public get_my_claim = async (claim: string) => {
+    const { data, error } = await supabase
+    .rpc('get_my_claim', {claim});
+    return { data, error };
+  }
+  public is_claims_admin = async () => {
+    const { data, error } = await supabase
+    .rpc('is_claims_admin', {});
+    return { data, error };
+  }
+```
+
+The following functions can only be used by a **"claims admin"**, that is, a user who has the `claims_admin` custom claim set to `true`:
+
+(Note: these functions allow you to view, set, and delete claims for any user of your application, so these would be appropriate for an **administrative** branch of your application to be used only by high-level users with the proper security rights (i.e. `claims_admin` level users.))
+```ts
+  public get_claims = async (uid: string) => {
+    const { data, error } = await supabase
+    .rpc('get_claims', {uid});
+    return { data, error };
+  }
+  public get_claim = async (uid: string, claim: string) => {
+    const { data, error } = await supabase
+    .rpc('get_claim', {uid, claim});
+    return { data, error };
+  }
+  public set_claim = async (uid: string, claim: string, value: object) => {
+    const { data, error } = await supabase
+    .rpc('set_claim', {uid, claim, value});
+    return { data, error };
+  }
+  public delete_claim = async (uid: string, claim: string) => {
+    const { data, error } = await supabase
+    .rpc('delete_claim', {uid, claim});
+    return { data, error };
+  }
+```
+
 ## FAQ
 ### What are custom claims?
 Custom Claims are special attributes attached to a user that you can use to control access to portions of your application.  
