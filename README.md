@@ -71,7 +71,40 @@ Set a complex, nested **json** / **object** value.
 
 
 ### Inside PostgreSQL Functions and Triggers
-tbd
+When using custom claims from inside a PostgreSQL function or trigger, you can use any of the functions shown in the section above: `Inside the Query Editor`.
+
+In addition, you can use the following functions that are specific to the currently logged-in user:
+
+#### `is_claims_admin()` returns bool
+##### example
+`select is_claims_admin();`
+##### result
+```
+| is_claims_admin |
+| --------------- |
+| true            |
+```
+
+#### `get_my_claims()` returns jsonb
+##### example
+`select get_my_claims();`
+##### result
+```
+| get_my_claims                                                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {"provider": "email", "userrole": "MANAGER", "providers": ["email"], "userlevel": 100, "useractive": true, "userjoined": "2022-05-20T14:07:27.742Z", "claims_admin": true} |
+```
+
+#### `get_my_claim(claim TEXT)` returns jsonb
+##### example
+`select get_my_claim('userlevel');`
+##### result
+```
+| get_my_claim |
+| ------------ |
+| 100          |
+```
+
 ### Inside your app (using `.rpc()`)
 tbd
 ## FAQ
