@@ -72,4 +72,4 @@ CREATE OR REPLACE FUNCTION delete_claim(uid uuid, claim text) RETURNS "text"
       END IF;
     END;
 $$;
-
+NOTIFY pgrst, 'reload schema';

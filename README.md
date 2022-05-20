@@ -1,4 +1,17 @@
 # Supabase Custom Claims
+## Installing the Functions
+The file [install.sql](./install.sql) contains all the PostgreSQL functions you need to implement and manage custom claims in your Supabase project.  
+
+1. Paste the SQL code from [install.sql](./install.sql) into the SQL Query Editor of your Supabase project.
+2. Click `RUN` to execute the code.
+## Uninstalling the Functions
+
+1. Paste the SQL code from [uninstall.sql](./uninstall.sql) into the SQL Query Editor of your Supabase project.
+2. Click `RUN` to execute the code.
+
+## Usage
+
+
 ## FAQ
 ### What are custom claims?
 Custom Claims are special attributes attached to a user that you can use to control access to portions of your application.  
