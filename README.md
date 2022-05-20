@@ -9,6 +9,20 @@ The file [install.sql](./install.sql) contains all the PostgreSQL functions you 
 1. Paste the SQL code from [uninstall.sql](./uninstall.sql) into the SQL Query Editor of your Supabase project.
 2. Click `RUN` to execute the code.
 
+### Security Considerations
+If you want to tighten security so that custom claims can only be set or deleted from inside the query editor or inside your PostgreSQL functions or triggers, edit the function `is_claims_admin()` to disallow usage by app users (no usage through the API / Postgrest).  Instructions are included in the function.
+
+By default, usage is allowed through your API, but the ability to set or delete claims is restricted to only users who have the `claims_admin` custom claim set to `true`.  This allows you to create an **"admin"** section of your app that allows designated users to modify custom claims for other users of your app.
+
+### Bootstrapping
+If the only way to set or delete claims requires the `claims_admin` claim to be set to `true` and no users have that claim, how can I edit custom claims from within my app?
+
+The answer is to **"bootstrap"** a user by running the following command inside your Supabase Query Editor window:
+
+`select set_claim('03acaa13-7989-45c1-8dfb-6eeb7cf0b92e', 'claims_admin', 'true');`
+
+where `03acaa13-7989-45c1-8dfb-6eeb7cf0b92e` is the `id` of your admin user found in `auth.users`.
+
 ## Usage
 ### Inside the Query Editor
 You can get, set, and delete claims for any user based on the user's `id` (uuid) with the following functions:
