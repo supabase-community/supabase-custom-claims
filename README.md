@@ -111,7 +111,7 @@ tbd
 
 Here are some sample functions that can be used by any authenticated (logged-in) user of your application:
 
-```ts
+```js
   public get_my_claims = async () => {
     const { data, error } = await supabase
     .rpc('get_my_claims', {});
@@ -133,7 +133,7 @@ The following functions can only be used by a **"claims admin"**, that is, a use
 
 (Note: these functions allow you to view, set, and delete claims for any user of your application, so these would be appropriate for an **administrative** branch of your application to be used only by high-level users with the proper security rights (i.e. `claims_admin` level users.))
 
-```ts
+```js
   public get_claims = async (uid: string) => {
     const { data, error } = await supabase
     .rpc('get_claims', {uid});
