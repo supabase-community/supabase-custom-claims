@@ -3,14 +3,23 @@ CREATE OR REPLACE FUNCTION is_claims_admin() RETURNS "bool"
   AS $$
   BEGIN
     IF session_user = 'authenticator' THEN
+      --------------------------------------------
+      -- To disallow any authenticated app users
+      -- from editing claims, delete the following
+      -- block of code and replace it with:
+      -- RETURN FALSE;
+      --------------------------------------------
       IF extract(epoch from now()) > coalesce((current_setting('request.jwt.claims', true)::jsonb)->>'exp', '0')::numeric THEN
         return false; -- jwt expired
       END IF; 
       IF coalesce((current_setting('request.jwt.claims', true)::jsonb)->'app_metadata'->'claims_admin', 'false')::bool THEN
-        return true; -- does not have claims_admin set to true
+        return true; -- user has claims_admin set to true
       ELSE
-        return false;
+        return false; -- user does NOT have claims_admin set to true
       END IF;
+      --------------------------------------------
+      -- End of block 
+      --------------------------------------------
     ELSE -- not a user session, probably being called from a trigger or something
       return true;
     END IF;

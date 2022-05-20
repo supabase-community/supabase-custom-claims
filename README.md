@@ -18,6 +18,7 @@ Custom Claims are special attributes attached to a user that you can use to cont
 
 For example:
 ```
+plan: "TRIAL"
 user_level: 100
 group_name: "Super Guild!"
 joined_on: "2022-05-20T14:28:18.217Z"
