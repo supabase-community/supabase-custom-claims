@@ -200,6 +200,13 @@ This may sound trivial, but this could have a significant effect on scalability 
 ### What are the drawbacks to using custom claims?
 One drawback is that claims don't get updated automatically, so if you assign a user a new custom claim, they may need to log out and log back in to have the new claim available to them.  The same goes for deleting or changing a claim.  So this is not a good tool for storing data that changes frequently.
 
+### What's the difference between `auth.users.raw_app_meta_data` and `auth.users.raw_user_meta_data`?
+The `auth.users` table used by Supabase Auth (GoTrue) has both `raw_app_meta_data` and a `raw_user_meta_data` fields.
+
+`raw_user_meta_data` is designed for profile data and can be created and modified by a user.  For example, this data can be set when a user signs up: [sign-up-with-additional-user-meta-data](https://supabase.com/docs/reference/javascript/auth-signup#sign-up-with-additional-user-meta-data) or this data can be modified by a user with [auth-update](https://supabase.com/docs/reference/javascript/auth-update)
+
+`raw_app_meta_data` is designed for use by the application layer and is used by GoTrue to handle authentication (For exampple, the `provider` and `providers` claims are used by GoTrue to track authentication providers.)  `raw_app_meta_data` is not accessible to the user by default.
+
 ### NOTES:
 ##### updating claims from a server process or edge function
 https://supabase.com/docs/reference/javascript/auth-api-updateuserbyid#updates-a-users-app_metadata
