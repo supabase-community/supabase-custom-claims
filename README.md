@@ -69,7 +69,6 @@ Set a complex, nested **json** / **object** value.
 | OK           |
 ```
 
-
 ### Inside PostgreSQL Functions and Triggers
 When using custom claims from inside a PostgreSQL function or trigger, you can use any of the functions shown in the section above: `Inside the Query Editor`.
 
