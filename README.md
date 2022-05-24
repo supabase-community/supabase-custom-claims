@@ -207,7 +207,7 @@ Custom claims are stored in the `auth.users` table, in the `raw_app_meta_data` c
 The Supabase Auth System (GoTrue) currently uses the following custom claims: `provider` and `providers`, so DO NOT use these.  Any other valid string should be ok as the name for your custom claim(s), though.
 
 ### Why use custom claims instead of just creating a table?
-Performance, mostly.  Custom claims are stored the security token a user receives when logging in, and these claims are made available to the PostgreSQL database as a configuration parameter, i.e. `current_setting('request.jwt.claims', true)`.  So the database has access to these values immediately without needing to do any disk i/o.
+Performance, mostly.  Custom claims are stored in the security token a user receives when logging in, and these claims are made available to the PostgreSQL database as a configuration parameter, i.e. `current_setting('request.jwt.claims', true)`.  So the database has access to these values immediately without needing to do any disk i/o.
 
 This may sound trivial, but this could have a significant effect on scalability if you use claims in an RLS (Row Level Security) Policy, as it could potentially eliminate thousands (or even millions) of database calls.
 
