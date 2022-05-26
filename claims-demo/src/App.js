@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Auth from './Auth'
 import Logout from './Logout'
-import Session from './Session'
+import TestFunctions from './TestFunctions'
 
 function App() {
 	const [session, setSession] = useState(null)
@@ -26,7 +26,7 @@ function App() {
           : 
           <>
             <Logout />
-            <Session session={session} />
+            <TestFunctions session={session} />
           </>
         }
 			</div>

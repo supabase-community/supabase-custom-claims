@@ -12,4 +12,19 @@
   text-align: center;
 }
 
+button {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+pre {
+  margin: 20px;
+  border: 1px solid;
+  padding: 5px;
+}
+.title {
+  margin-left: 20px;
+  font-weight: bold;
+}
 
