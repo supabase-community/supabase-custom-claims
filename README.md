@@ -1,6 +1,8 @@
 # Supabase Custom Claims
 Want to know more about Custom Claims?  See the [FAQ](#faq) below.
 
+This is just one way to implement `custom claims` for a Supabase project.  The goal here is simply to add JSON data to the access token that an authenticated user receives when logging into your application.  That token (and thus the `custom claims` contained in that token) can be read and used by both your application and by your PostgreSQL database server.  These `custom claims` are stored in the `raw_app_meta_data` field of the `users` table in the `auth` schema.  (`auth.users.raw_app_meta_data`)
+
 ## Installing the Functions
 The file [install.sql](./install.sql) contains all the PostgreSQL functions you need to implement and manage custom claims in your Supabase project.  
 
