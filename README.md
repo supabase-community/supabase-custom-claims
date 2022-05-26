@@ -138,6 +138,22 @@ To use custom claims in an RLS Policy, you'll normally use the `get_my_claim` to
 
 ### Inside your app (using `.rpc()`)
 
+#### Getting Claims Data from Local Session Data
+You can extract claims information from the `session` object you get when the user is logged in.  For example:
+
+```js
+		supabase.auth.onAuthStateChange((_event, session) => {
+            if (session?.user) {
+    			console.log(session?.user?.app_metadata) // show custom claims
+            }
+		})
+```
+
+If any claims have changed since your last log in, you may need to log out and back in to see these changes.
+
+#### Getting Claims Data from the Server
+You can also query the server to see what claims are set for the current user.
+
 Here are some sample functions that can be used by any authenticated (logged-in) user of your application:
 
 ```js
