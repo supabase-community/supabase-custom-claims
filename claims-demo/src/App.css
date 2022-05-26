@@ -1,0 +1,15 @@
+.App {
+  
+}
+
+.center {
+  text-align: center;
+}
+
+.App-header {
+  font-size: calc(10px + 2vmin);
+  font-weight: bold;
+  text-align: center;
+}
+
+
