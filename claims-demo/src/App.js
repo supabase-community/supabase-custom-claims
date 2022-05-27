@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Auth from './Auth'
 import Logout from './Logout'
+import Userinfo from './Userinfo'
 import TestFunctions from './TestFunctions'
 
 function App() {
@@ -22,10 +23,15 @@ function App() {
 			</header>
 			<div>
 				{!session ? 
-          <Auth /> 
+					<div className='center'>
+			          <Auth /> 
+					</div>
           : 
           <>
-            <Logout />
+			<div className='center'>
+            	<Userinfo session={session} />
+				<Logout />
+			</div>
             <TestFunctions session={session} />
           </>
         }

@@ -23,12 +23,27 @@ const TestFunctions = ({session}) => {
         if (error) console.error('is_claims_admin error', error);
         else setOutput(JSON.stringify(data, null, 2));
     } 
+    const session_claims = async () => {
+        setTitle('session_claims')
+        if (!session.user) {
+            setOutput('no session.user')
+        } else {
+            setOutput(JSON.stringify(session.user?.app_metadata, null, 2))
+        }
+    }
 	return (
         <>
 		<div className='center'>
+            Local: 
             <button onClick={show_session}>
 				session
 			</button>
+            <button onClick={session_claims}>
+				session_claims
+			</button>
+		</div>
+		<div className='center'>
+            Server:
 			<button onClick={get_my_claims}>
 				get_my_claims()
 			</button>
@@ -36,9 +51,21 @@ const TestFunctions = ({session}) => {
 				is_claims_admin()
 			</button>
 		</div>
+        <div className='center'>
+            { (session?.user?.app_metadata?.claims_admin) && 
+                <span>ADMIN</span>
+            }
+            { (!session?.user?.app_metadata?.claims_admin) && 
+                <span>NOT ADMIN</span>
+            }
+        </div>
         <div>
             <div className="title">{title}</div>
             <pre>{output}</pre>
+        </div>
+
+        <div className="title">
+            {(session?.user?.app_metadata?.claims_admin) ? 'you are a CLAIMS_ADMIN' : 'you are NOT a CLAIMS_ADMIN'}
         </div>
         </>
 	)
