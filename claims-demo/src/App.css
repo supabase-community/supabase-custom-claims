@@ -23,6 +23,12 @@ pre {
   border: 1px solid;
   padding: 5px;
 }
+.notes {
+  margin: 20px;
+  border: none;
+  padding: 5px;
+  
+}
 .title {
   margin-left: 20px;
   font-weight: bold;
