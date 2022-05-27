@@ -21,7 +21,7 @@ By default, usage is allowed through your API, but the ability to set or delete 
 ### Bootstrapping
 If the only way to set or delete claims requires the `claims_admin` claim to be set to `true` and no users have that claim, how can I edit custom claims from within my app?
 
-The answer is to **"bootstrap"** a user by running the following command inside your Supabase Query Editor window:
+The answer is to **"bootstrap"** a user by running the following command inside your [Supabase Query Editor](https://app.supabase.io/project/_/sql) window:
 
 `select set_claim('03acaa13-7989-45c1-8dfb-6eeb7cf0b92e', 'claims_admin', 'true');`
 
