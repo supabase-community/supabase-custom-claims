@@ -1,10 +1,17 @@
 import { supabase } from './supabaseClient'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const TestFunctions = ({session}) => {
     const [output, setOutput] = useState('')
     const [notes, setNotes] = useState('')
     const [title, setTitle] = useState('')
+    const [uid, setUid] = useState('')
+    const [claim, setClaim] = useState('')
+    const [value, setValue] = useState('')
+	useEffect(() => {
+		setUid(session?.user?.id || '')
+	}, [])
+
     const get_my_claims = async () => {
         setOutput('Loading...')
         setTitle('get_my_claims')
@@ -36,6 +43,36 @@ const TestFunctions = ({session}) => {
         }
         setNotes('This returns the value of "app_metadata" (the claims) from the current session object (returned from "supabase.auth.onAuthStateChange").')
     }
+    const set_claim = async () => {
+        if (!uid || !claim || !value) return;
+        setOutput('Loading...')
+        setTitle('set_claim')
+        const { data, error } = await supabase.rpc('set_claim', {uid, claim, value});
+        if (error) console.error('set_claim error', error);
+        else { // setOutput(JSON.stringify(data, null, 2)); 
+            const { user, error: updateError } = await refresh_claims();
+            if (updateError) console.error('update error', updateError);
+            else setOutput(JSON.stringify(user?.app_metadata, null, 2));
+        }
+        setNotes('This calls the server function "set_claim(uid, claim, value)" to set a custom claim for a given user by id (uuid).')
+    }
+    const delete_claim = async () => {
+        if (!uid || !claim) return;
+        setOutput('Loading...')
+        setTitle('delete_claim')
+        const { data, error } = await supabase.rpc('delete_claim', {uid, claim});
+        if (error) console.error('delete_claim error', error);
+        else { // setOutput(JSON.stringify(data, null, 2)); 
+            const { user, error: updateError } = await refresh_claims();
+            if (updateError) console.error('update error', updateError);
+            else setOutput(JSON.stringify(user?.app_metadata, null, 2));
+        }
+        setNotes('This calls the server function "delete_claim(uid, claim)" to delete a custom claim for a given user by id (uuid).')
+    }
+    const refresh_claims = async () => {
+        const { user, error } = await supabase.auth.update({});
+        return { user, error };
+    }
 	return (
         <>
 		<div className='center'>
@@ -46,6 +83,9 @@ const TestFunctions = ({session}) => {
             <button onClick={session_claims}>
 				session_claims
 			</button>
+            <button onClick={refresh_claims}>
+                refresh_claims
+            </button>
 		</div>
 		<div className='center'>
             Server:
@@ -56,6 +96,17 @@ const TestFunctions = ({session}) => {
 				is_claims_admin()
 			</button>
 		</div>
+        <div className="center">
+            uid: <input type="text" value={uid} onChange={e => setUid(e.target.value)} placeholder="user id (auth.users.id)" />
+            &nbsp;claim: <input type="text" value={claim} onChange={e => setClaim(e.target.value)} placeholder="claim name" />
+            &nbsp;value: <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="claim value" />
+            <button onClick={set_claim} disabled={!uid || !claim || !value || !(session?.user?.app_metadata?.claims_admin)}>
+                set_claim
+            </button>
+            <button onClick={delete_claim} disabled={!uid || !claim || !(session?.user?.app_metadata?.claims_admin)}>
+                delete_claim
+            </button>
+        </div>
         <div className='center'>
             { (session?.user?.app_metadata?.claims_admin) && 
                 <span>ADMIN</span>
