@@ -232,6 +232,8 @@ This may sound trivial, but this could have a significant effect on scalability 
 ### What are the drawbacks to using custom claims?
 One drawback is that claims don't get updated automatically, so if you assign a user a new custom claim, they may need to log out and log back in to have the new claim available to them.  The same goes for deleting or changing a claim.  So this is not a good tool for storing data that changes frequently.
 
+You can force a refresh of the current session token by calling `supabase.auth.update({})` on the client, but if a claim is changed by a server process or by a claims adminstrator manually, there's no easy way to notify the user that their claims have changed.  You can provide a "refresh" button or a refresh function inside your app to update the claims at any time, though.
+
 ### How can I write a query to find all the users who have a specific custom claim set?
 #### examples
 ##### find all users who have `claims_admin` set to `true`
