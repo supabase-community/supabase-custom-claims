@@ -20,6 +20,14 @@ const TestFunctions = ({session}) => {
         else setOutput(JSON.stringify(data, null, 2));
         setNotes('This calls the server function "get_my_claims()" and gets the claims from the current token at the server.')
     }
+    const get_my_claim = async () => {
+        setOutput('Loading...')
+        setTitle(`get_my_claim('${claim}')`)
+        const { data, error } = await supabase.rpc('get_my_claim',{claim});
+        if (error) console.error('get_my_claim error', error);
+        else setOutput(JSON.stringify(data, null, 2));
+        setNotes('This calls the server function "get_my_claim(claim text)" and gets the claim from the current token at the server.')
+    }
     const show_session = async () => {
         setOutput('Loading...')
         setTitle('session object')
@@ -95,7 +103,11 @@ const TestFunctions = ({session}) => {
 			<button onClick={is_claims_admin}>
 				is_claims_admin()
 			</button>
-		</div>
+            claim: <input type="text" value={claim} onChange={e => setClaim(e.target.value)} placeholder="claim name" />
+			<button onClick={get_my_claim}>
+				get_my_claim('{claim}')
+			</button>
+ 		</div>
         <div className="center">
             uid: <input type="text" value={uid} onChange={e => setUid(e.target.value)} placeholder="user id (auth.users.id)" />
             &nbsp;claim: <input type="text" value={claim} onChange={e => setClaim(e.target.value)} placeholder="claim name" />
