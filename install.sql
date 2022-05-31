@@ -40,7 +40,7 @@ CREATE OR REPLACE FUNCTION get_my_claim(claim TEXT) RETURNS "jsonb"
 $$;
 
 CREATE OR REPLACE FUNCTION get_claims(uid uuid) RETURNS "jsonb"
-    LANGUAGE "plpgsql" SECURITY DEFINER
+    LANGUAGE "plpgsql" SECURITY DEFINER SET search_path = public
     AS $$
     DECLARE retval jsonb;
     BEGIN
@@ -54,7 +54,7 @@ CREATE OR REPLACE FUNCTION get_claims(uid uuid) RETURNS "jsonb"
 $$;
 
 CREATE OR REPLACE FUNCTION get_claim(uid uuid, claim text) RETURNS "jsonb"
-    LANGUAGE "plpgsql" SECURITY DEFINER
+    LANGUAGE "plpgsql" SECURITY DEFINER SET search_path = public
     AS $$
     DECLARE retval jsonb;
     BEGIN
@@ -68,7 +68,7 @@ CREATE OR REPLACE FUNCTION get_claim(uid uuid, claim text) RETURNS "jsonb"
 $$;
 
 CREATE OR REPLACE FUNCTION set_claim(uid uuid, claim text, value jsonb) RETURNS "text"
-    LANGUAGE "plpgsql" SECURITY DEFINER
+    LANGUAGE "plpgsql" SECURITY DEFINER SET search_path = public
     AS $$
     BEGIN
       IF NOT is_claims_admin() THEN
@@ -83,7 +83,7 @@ CREATE OR REPLACE FUNCTION set_claim(uid uuid, claim text, value jsonb) RETURNS 
 $$;
 
 CREATE OR REPLACE FUNCTION delete_claim(uid uuid, claim text) RETURNS "text"
-    LANGUAGE "plpgsql" SECURITY DEFINER
+    LANGUAGE "plpgsql" SECURITY DEFINER SET search_path = public
     AS $$
     BEGIN
       IF NOT is_claims_admin() THEN
