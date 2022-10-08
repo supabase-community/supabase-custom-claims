@@ -255,3 +255,5 @@ The `auth.users` table used by Supabase Auth (GoTrue) has both `raw_app_meta_dat
 ##### updating claims from a server process or edge function
 https://supabase.com/docs/reference/javascript/auth-api-updateuserbyid#updates-a-users-app_metadata
 
+## Warning
+Be sure to watch for **reserved** claims in your particular development environment.  For example, the claims `exp` and `role` are reserved by the Supabase Realtime system and can cause problems if you try use these names.  To avoid these potential problems, it's good practice to use a custom identifier in your custom claims, such as `MY_COMPANY_item1`, `MY_COMPANY_item2`, etc.
