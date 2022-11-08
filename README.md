@@ -201,6 +201,9 @@ The following functions can only be used by a **"claims admin"**, that is, a use
   }
 ```
 
+## Running an older project (Postgres 13 or earlier?)
+See [this issue](https://github.com/supabase-community/supabase-custom-claims/issues/3)
+
 ## FAQ
 ### What are custom claims?
 Custom Claims are special attributes attached to a user that you can use to control access to portions of your application.  
