@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION is_claims_admin() RETURNS "bool"
   LANGUAGE "plpgsql" 
   AS $$
   BEGIN
-    IF session_user = 'authenticator' THEN
+    IF current_user = 'authenticated' THEN
       --------------------------------------------
       -- To disallow any authenticated app users
       -- from editing claims, delete the following
