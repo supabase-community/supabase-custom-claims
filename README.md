@@ -242,7 +242,7 @@ You can force a refresh of the current session token by calling `supabase.auth.u
 ##### find all users who have `claims_admin` set to `true`
 `select * from auth.users where (auth.users.raw_app_meta_data->'claims_admin')::bool = true;`
 ##### find all users who have a `userlevel` over 100
-`select * from auth.users where (auth.users.raw_app_meta_data->'userleval')::numeric > 100;`
+`select * from auth.users where (auth.users.raw_app_meta_data->'userlevel')::numeric > 100;`
 ##### find all users whose `userrole` is set to `"MANAGER"`
 (note for strings you need to add double-quotes becuase data is data is stored as JSONB)
 `select * from auth.users where (auth.users.raw_app_meta_data->'userrole')::text = '"MANAGER"';`
