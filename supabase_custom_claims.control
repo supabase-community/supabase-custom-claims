@@ -1,0 +1,7 @@
+# supabase_custom_claims extension
+comment = 'PostgreSQL functions that support custom claims in Supabase by writing to the raw_app_meta_data column in the auth.users table' 
+requires = ''
+default_version = '1.0'
+module_pathname = '$libdir/supabase_custom_claims'
+relocatable = false
+schema = public
