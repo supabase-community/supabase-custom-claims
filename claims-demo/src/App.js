@@ -10,8 +10,11 @@ function App() {
 	const [session, setSession] = useState(null)
 
 	useEffect(() => {
-		setSession(supabase.auth.session())
-
+		const run = async () => {
+			const { data } = await supabase.auth.getSession()
+			setSession(data.session)
+		}
+		run();
 		supabase.auth.onAuthStateChange((_event, session) => {
 			setSession(session)
 		})

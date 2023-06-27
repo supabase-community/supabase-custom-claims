@@ -78,7 +78,7 @@ const TestFunctions = ({session}) => {
         setNotes('This calls the server function "delete_claim(uid, claim)" to delete a custom claim for a given user by id (uuid).')
     }
     const refresh_claims = async () => {
-        const { user, error } = await supabase.auth.update({});
+        const { data: { user }, error } = await supabase.auth.refreshSession()
         return { user, error };
     }
 	return (
