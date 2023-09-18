@@ -11,7 +11,10 @@ CREATE OR REPLACE FUNCTION is_claims_admin() RETURNS "bool"
       --------------------------------------------
       IF extract(epoch from now()) > coalesce((current_setting('request.jwt.claims', true)::jsonb)->>'exp', '0')::numeric THEN
         return false; -- jwt expired
-      END IF; 
+      END IF;
+      If current_setting('request.jwt.claims', true)::jsonb->>'role' = 'service_role' THEN
+        RETURN true; -- service role users have admin rights
+      END IF;
       IF coalesce((current_setting('request.jwt.claims', true)::jsonb)->'app_metadata'->'claims_admin', 'false')::bool THEN
         return true; -- user has claims_admin set to true
       ELSE
