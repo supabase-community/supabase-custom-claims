@@ -1,0 +1,36 @@
+.App {
+  
+}
+
+.center {
+  text-align: center;
+}
+
+.App-header {
+  font-size: calc(10px + 2vmin);
+  font-weight: bold;
+  text-align: center;
+}
+
+button {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+pre {
+  margin: 20px;
+  border: 1px solid;
+  padding: 5px;
+}
+.notes {
+  margin: 20px;
+  border: none;
+  padding: 5px;
+  
+}
+.title {
+  margin-left: 20px;
+  font-weight: bold;
+}
+
